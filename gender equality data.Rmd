@@ -1,0 +1,56 @@
+---
+title: "GIS_05_gender inequality"
+author: "ixxiiris"
+date: "2024-10-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## library all packages
+
+```{r cars}
+library(sf)
+library(here)
+library(readxl)
+library(dplyr)
+library(tidyverse)
+library(janitor)
+library(plotly)
+library(usethis)
+```
+
+## Join the global gender inequality index to data of the world
+### load global gender inequaility data and clean data
+
+```{r pressure, echo=FALSE}
+# load data
+path_to_genderdata <- "E:\\study\\CASAterm1\\practical\\GIS_WEEK4\\2010-2019genderequality.CSV"
+gnder_data <- st_read(path_to_genderdata)
+names(gender_data) <- make.names(names(gender_data), unique = TRUE)
+gender_data <- gender_data %>%
+  rename(COUNTRY = `Country`)
+# check data
+str(gender_data)
+```
+### load spatial data of the world
+```{r}
+# load data
+GlobalJSON <- st_read(
+  "E:\\study\\CASAterm1\\practical\\GIS_WEEK4\\World_Countries_(Generalized)_9029012925078512962.geojson"
+)
+# view data structure
+print(GlobalJSON)
+```
+### merge gender inequality data to world data
+```{r}
+# merge data
+merged_data <- GlobalJSON %>%
+  left_join(gender_data, by = "COUNTRY")
+
+# 检查合并结果
+print(merged_data)
+```
+
