@@ -50,7 +50,7 @@ print(GlobalJSON)
 merged_data <- GlobalJSON %>%
   left_join(gender_data, by = "COUNTRY")
 
-# 检查合并结果
+# check merge result
 print(merged_data)
 ```
 
