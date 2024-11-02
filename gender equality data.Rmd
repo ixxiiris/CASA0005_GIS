@@ -53,4 +53,7 @@ merged_data <- GlobalJSON %>%
 # check merge result
 print(merged_data)
 ```
+```{r}
+hi, use "here" package so I can load data from my local machine :)
+```
 
